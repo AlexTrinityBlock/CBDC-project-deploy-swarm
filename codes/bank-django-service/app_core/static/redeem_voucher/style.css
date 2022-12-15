@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+/* CSS 變數設置 */
+:root {
+    --page-background-color-1: #41b6ff;
+    --page-background-color-2: #d2eeff;
+    --panel-background-color: #FFFFFF;
+    --main-color: #75C7FB;
+    --shadow-color: #1aa1f5;
+    --font-size-1: 30px;
+    --font-color-1: #FFFFFF;
+    --margin-vertical-1: 30px;
+    --card-color-2: #00b1cc;
+    --card-padding-top-1: 35px;
+    --nav-font-size-1:20px;
+}
+
+/* 連結去除底線 */
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+/* 全局字體 */
+body{
+    color: var(--page-background-color-1);
+}
+
+/* 上排Nav的字體大小 */
+nav{
+    font-size: var(--nav-font-size-1);
+}
+
+/* 左上方Nav的圖示 */
+#nav-icon {
+    height: 30px;
+    font-size: 18px;
+}
+
+/* 介紹文字標題 */
+#introduction-title {
+    margin-top: 150px;
+    font-size: 70px;
+    color: var(--page-background-color-1);
+}
+
+/* 介紹文字 */
+#introduction-text {
+    font-size: var(--font-size-1);
+    color: var(--page-background-color-1);
+}
+
+/* 介紹圖片 */
+#introduction-image {
+    margin-top: 150px;
+    margin-left: 100px;
+    width: 150px;
+}
+
+@media (max-width: 800px) {
+    #introduction-image {
+        margin-top: 150px;
+        margin-left: 50px;
+        width: 100px;
+    }
+}
+
+/* 介紹文字背景 */
+#introduction-backbround {
+    min-height: 450px;
+    /* background-image: linear-gradient(to right, var(--page-background-color-1), var(--page-background-color-2)); */
+    background-color: var(--panel-background-color);
+}
+
+/* 餘額標題文字 */
+#qr-title-text {
+    color: var(--main-color);
+    font-size: var(--font-size-1);
+    margin-top: var(--margin-vertical-1);
+    margin-bottom: var(--margin-vertical-1);
+}
+
+/* 餘額卡片 */
+#qr-card {
+    background-color: var(--main-color);
+    color: var(--font-color-1);
+    font-size: var(--font-size-1);
+    padding-top: var(--card-padding-top-1);
+    margin-top: var(--margin-vertical-1);
+    margin-bottom: var(--margin-vertical-1);
+}
+
+/* QR code 圖片 */
+#qr_code img{
+    margin-left: auto;
+    margin-right: auto;
+}

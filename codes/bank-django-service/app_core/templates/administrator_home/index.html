@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/bootstrap5.0.2/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/administrator_home/style.css">
+</head>
+
+<body>
+    <!-- 上排選單 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- 圖片首頁連結 -->
+            <a class="navbar-brand" href="/administrator/home">
+                <h1 id='nav-title'>CBDC 管理員</h1>
+            </a>
+            <!-- /圖片首頁連結 -->
+            <!-- 選單響應按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- /選單響應按鈕 -->
+            <!-- 選項 -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/administrator/home">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/administrator/transaction_log">交易紀錄</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="">用戶清單</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/administrator/issue/voucher">發行點數</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/logout">登出</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /選項 -->
+        </div>
+    </nav>
+    <!-- /上排選單 -->
+
+    <!-- 主畫面橫幅 -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" id="introduction-backbround">
+                <div class="container">
+                    <div class="row">
+                        <!-- 介紹文字 -->
+                        <div class="col-6">
+                            <h1 id="introduction-title">CBDC</h1>
+                            <p id="introduction-text" class="">檢視用戶交易紀錄,用戶清單，並且發行點數。</p>
+                        </div>
+                        <!-- /介紹文字 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /主畫面橫幅 -->
+
+    <!-- 下方服務選項 -->
+    <div class="container text-secondary">
+        <!-- 服務項目 -->
+        <div class="row text-center">
+            <div class="col services-text">服務項目</div>
+        </div>
+        <!-- /服務項目 -->
+
+        <!-- 服務卡片組 -->
+        <div class="row text-center">
+            <!-- 卡片1 -->
+            <div class="col-md-6 ">
+                <!-- 卡片連結 -->
+                <a href="/administrator/transaction_log">
+                    <div class="card services-cards">
+                        <div class="card-body">
+                            <h3 class="card-title">交易紀錄</h3>
+                            <p>使用者交易紀錄</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- /卡片1 -->
+
+            <!-- 卡片2 -->
+            <!-- <div class="col-md-4"> -->
+                <!-- 卡片連結 -->
+                <!-- <a href="">
+                    <div class="card services-cards">
+                        <div class="card-body">
+                            <h3 class="card-title">用戶清單</h3>
+                            <p>用戶名單</p>
+                        </div>
+                    </div>
+                </a> -->
+                <!-- /卡片連結 -->
+            <!-- </div> -->
+            <!-- /卡片2 -->
+
+            <!-- 卡片3 -->
+            <div class="col-md-6">
+                <!-- 卡片連結 -->
+                <a href="/administrator/issue/voucher">
+                    <div class="card services-cards">
+                        <div class="card-body">
+                            <h3 class="card-title">發行點數</h3>
+                            <p>發行點數，並且查看已經發行的點數。</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- /卡片3 -->
+
+        </div>
+        <!-- /服務卡片組 -->
+    </div>
+    <!-- /下方服務選項 -->
+</body>
+<script src="/static/bootstrap5.0.2/bootstrap.bundle.min.js"></script>
+<script type="module" src="/static/administrator_home/script.js"></script>
+
+</html>

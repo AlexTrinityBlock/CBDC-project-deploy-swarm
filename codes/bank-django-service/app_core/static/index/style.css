@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+/* CSS 變數設置 */
+:root {
+    --page-background-color-1: #41b6ff;
+    --page-background-color-2: #91d2fa;
+    --panel-background-color: #FFFFFF;
+    --main-color: #75C7FB;
+    --shadow-color: #1aa1f5;
+    --font-size-1: 30px;
+    --font-color-1: #FFFFFF;
+    --margin-vertical-1: 30px;
+    --card-color-2: #00b1cc;
+    --card-padding-top-1: 35px;
+    --nav-font-size-1:20px;
+    --button-font-size-1:30px;
+}
+
+/* 連結去除底線 */
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+nav{
+    font-size: var(--nav-font-size-1);
+}
+
+/* 左上方Nav的圖示 */
+#nav-icon {
+    height: 30px;
+    font-size: 18px;
+}
+
+/* 介紹文字標題 */
+#introduction-title {
+    margin-top: 150px;
+    font-size: 70px;
+    color: white;
+}
+
+/* 介紹文字 */
+#introduction-text {
+    font-size: var(--font-size-1);
+    color: white;
+}
+
+/* 介紹圖片 */
+#introduction-image {
+    margin-top: 150px;
+    margin-left: 100px;
+}
+
+@media (max-width: 800px) {
+    #introduction-image {
+        margin-top: 150px;
+        margin-left: 50px;
+        width: 100px;
+    }
+}
+
+/* 介紹文字背景 */
+#introduction-backbround {
+    min-height: 100vh;
+    background-image: linear-gradient(to right, var(--page-background-color-1), var(--page-background-color-2));
+}
+
+/* 登入按鈕 */
+#login_btn{
+    color: var(--font-color-1);
+    font-size: var(--button-font-size-1);
+    background-color:rgba(0, 0, 0, 0);
+    border-width:3px;
+}
+
+/* 註冊按鈕 */
+#register_btn{
+    color: var(--font-color-1);
+    font-size: var(--button-font-size-1);
+    background-color:rgba(0, 0, 0, 0);
+    border-width:3px;
+}

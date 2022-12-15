@@ -1,0 +1,92 @@
+/* CSS 變數設置 */
+:root {
+    --page-background-color-1: #FE8D24;
+    --page-background-color-2: #ffd3aa;
+    --panel-background-color: #FFFFFF;
+    --main-color: #FE8D24;
+    --shadow-color: #fe7c03;
+}
+
+/* 整體頁面背景 */
+body {
+    /* background-color: var(--page-background-color); */
+    background-image: linear-gradient(to right, var(--page-background-color-1), var(--page-background-color-2));
+}
+
+/* 登入面板最外框 */
+.login-panel {
+    /* 背景 */
+    background-color: var(--panel-background-color);
+    /* 上方空白 */
+    margin-top: 100px;
+    /* 倒影 */
+    box-shadow: 9px 8px 5px 0px var(--shadow-color);
+    -webkit-box-shadow: 9px 8px 5px 0px var(--shadow-color);
+    -moz-box-shadow: 9px 8px 5px 0px var(--shadow-color);
+    /*  */
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 登入面板手機 */
+@media (max-width: 480px) {
+    .login-panel {
+        width: 100%;
+    }
+}
+
+/* 登入面板最外框 */
+.login-panel-image {
+    margin-top: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+}
+
+/* 登入面板主文字 */
+.login-panel-title {
+    /* 上方空白 */
+    margin-top: 5%;
+}
+
+/* 登入面版帳號文字 */
+.login-panel-label {
+    /* 上方空白 */
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+/* 登入框 */
+.input-group {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* 登入按鈕邊界 */
+.login-panel-submit-btn {
+    margin-top: 50px;
+    margin-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* 登入按鈕 */
+.login-panel-submit-btn button,
+.login-panel-submit-btn button:hover,
+.login-panel-submit-btn button:active {
+    background-color: var(--main-color) !important;
+    outline-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+/* 登入失敗提示 */
+#LoginFail {
+    color: var(--main-color);
+}
+
+/* 管理員標題 */
+.admin-title {
+    color: var(--main-color);
+}

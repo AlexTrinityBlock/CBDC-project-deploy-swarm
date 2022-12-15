@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/bootstrap5.0.2/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/index/style.css">
+</head>
+
+<body>
+    <!-- 上排選單 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- 圖片首頁連結 -->
+            <a class="navbar-brand" href="/home">
+                <img src="/static/index/CBDC.png" alt="CBDC計劃圖片" id="nav-icon">
+            </a>
+            <!-- /圖片首頁連結 -->
+            <!-- 選單響應按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- /選單響應按鈕 -->
+            <!-- 選項 -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/administrator/login">管理員登入</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /選項 -->
+        </div>
+
+    </nav>
+    <!-- /上排選單 -->
+
+    <!-- 主畫面橫幅 -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" id="introduction-backbround">
+                <div class="container">
+                    <div class="row">
+                        <!-- 介紹文字 -->
+                        <div class="col-6">
+                            <h1 id="introduction-title">CBDC</h1>
+                            <p id="introduction-text" class="">一個你可以信賴的數位點數平台</p>
+                        </div>
+                        <!-- /介紹文字 -->
+                        <!-- ICON -->
+                        <div class="col-6 ">
+                            <img id="introduction-image" src="../../static/index/ICON.png" alt="">
+                        </div>
+                        <!-- /ICON -->
+                    </div>
+                </div>
+                <!-- 登入與註冊 -->
+                <br><br>
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-6 text-center">
+                            <a href="/login">
+                                <button type="button" class="btn btn-light" id="login_btn">登入</button>
+                            </a>
+                        </div>
+                        <div class="col-6 text-center">
+                            <a href="/register">
+                                <button type="button" class="btn btn-light" id="register_btn">註冊</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <!-- /登入與註冊 -->
+            </div>
+        </div>
+    </div>
+    <!-- /主畫面橫幅 -->
+
+</body>
+<script src="/static/bootstrap5.0.2/bootstrap.bundle.min.js"></script>
+<script type="module" src="/static/index/script.js"></script>
+
+</html>

@@ -1,0 +1,893 @@
+openapi: 3.0.0
+info:
+  title: CBDC數位貨幣測試API系統
+  description: 資訊安全實驗室銀行端API
+  version: 0.1.9
+servers:
+  - url: http://127.0.0.1:8081
+    description: 銀行伺服器
+  - url: http://127.0.0.1:8086
+    description: 密碼學支援伺服器
+tags:
+  - name: "銀行使用者登入與註冊"
+    description: "銀行用戶登入API。"
+  - name: "銀行使用者貨幣服務"
+    description: "銀行用戶以有效的盲簽章兌換回存款額度，查詢餘額等服務。"
+  - name: "密碼學支援服務"
+    description: "密碼學支援服務API，請將 Server 調整到密碼學支援服務。"
+  - name: "儲值卡"
+    description: "儲值卡生成與儲值"
+  - name: "銀行使用者AES驗證API"
+    description: "銀行使用者AES驗證API"
+  - name: "銀行使用者電子錢包"
+    description: "銀行使用者電子錢包"
+  - name: "銀行管理員登入"
+    description: "銀行管理員登入API。"
+  - name: "銀行管理員存取訊息"
+    description: "銀行管理員可存取的，銀行使用者各項紀錄"
+
+
+paths:
+#################
+# 銀行伺服器 API #
+#################
+# 使用者登入
+  /api/login:
+    post:
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 登入使用者取得token。
+      description: ""
+      requestBody:
+        description: 登入使用者取得token。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                account:
+                  type: string
+                  default: user
+                  required: true
+                password:
+                  type: string
+                  default: user 
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+
+  # 驗證登入API
+  /api/check_login:
+    get:
+      security:
+        - token: []
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 檢查使用者token
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 檢查使用者token
+          # required: true
+          schema:
+            type: string
+      # 回應參數
+      responses:
+        '200':    # status code
+          description: 顯示token是否有效。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+
+  # 取得Token API
+  /api/get/token:
+    get:
+      security:
+        - token: []
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 取得Token API
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 使用者token
+          # required: true
+          schema:
+            type: string
+      # 回應參數
+      responses:
+        '200':    # status code
+          description: 顯示token是否有效。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  token:
+                    type: string
+                    example: Login success.
+
+# 登出
+  /api/logout:
+    post:
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 登出。
+      description: ""
+      requestBody:
+        description: 登入使用者取得token。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+                    
+  /api/register:
+    post:
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 註冊。
+      description: ""
+      requestBody:
+        description: 註冊
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties: 
+                account:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+                e_mail:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: registe success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+
+  # 取得使用者帳號
+  /api/get/account:
+    get:
+      security:
+        - token: []
+      tags:
+      - "銀行使用者登入與註冊"
+      summary: 取得使用者帳號
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 檢查使用者token
+          # required: true
+          schema:
+            type: string
+      # 回應參數
+      responses:
+        '200':    # status code
+          description: 顯示token是否有效。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  account:
+                    type: string
+                    example: abc123
+#######################
+# 密碼學支援伺服器 API #
+#######################
+  #提款
+  /withdraw:
+    post:
+      tags:
+      - "密碼學支援服務"
+      summary: 提款，獲得不被追蹤的數位貨幣盲簽章。
+      requestBody:
+        description: 提款，獲得不被追蹤的數位貨幣盲簽章。需要輸入銀行登入 Token。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 字串，銀行登入後取得的 token。
+                  type: string
+                  required: true
+                withdraw:
+                  description: 整數，要提領的金額。
+                  type: int
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  Info:
+                    type: string
+                    example: '{"currency": "1", "Text": "Technology provided by ECDSA project."}'
+                  R:
+                    type: string
+                    example:  d319c95e07fc2054fc0ae0a13fa74d5e7e5e85a9aac6244876af055ab61b0c5
+                  message:
+                    type: string
+                    example: 236eaa1d29afb27d3ed69461b24968d49452454c04e945e7f7aefd1204c9bcea
+                  s:
+                    type: string
+                    example: 301ac1953003348d41b6afdbd6145eebfa1fb2fc95f5493a626bdb2956aee6cc
+                  t:
+                    type: string
+                    example: 922257d693122b5ef27f1b635ee3fb3a3f457db8b21f5cabe78b0dcec729bbab
+  # 驗證簽章
+  /verify/currency:
+    post:
+      tags:
+      - "密碼學支援服務"
+      summary: 驗證盲簽章是否為銀行發佈。
+      requestBody:
+        description: 驗證盲簽章，公開訊息，是否為銀行發佈。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                Info:
+                  description: 銀行跟使用者的公開共識訊息。
+                  type: string
+                  required: true
+                message:
+                  description: 在兌換貨幣前，保持祕密的訊息。代表貨幣本身。
+                  type: string
+                  required: true
+                R:
+                  description: 盲簽章的一部分
+                  type: string
+                  required: true
+                s:
+                  description: 盲簽章的一部分
+                  type: string
+                  required: true
+                t:
+                  description: 盲簽章的一部分
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+#######################
+# 銀行管理員登入 API #
+#######################
+# 銀行管理員登入API
+  /api/administrator/login:
+    post:
+      tags:
+      - "銀行管理員登入"
+      summary: 登入使用者取得token。
+      description: ""
+      requestBody:
+        description: 登入使用者取得token。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                account:
+                  type: string
+                  default: root
+                  required: true
+                password:
+                  type: string
+                  default: dev 
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+
+# 銀行管理員登入驗證 API
+  # 驗證登入API
+  /api/administrator/check_login:
+    get:
+      security:
+        - token: []
+      tags:
+      - "銀行管理員登入"
+      summary: 檢查使用者token
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 檢查使用者token
+          # required: true
+          schema:
+            type: string
+      # 回應參數
+      responses:
+        '200':    # status code
+          description: 顯示token是否有效。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+# 銀行管理員登出
+# 登出
+  /api/administrator/logout:
+    post:
+      tags:
+      - "銀行管理員登入"
+      summary: 登出。
+      description: ""
+      requestBody:
+        description: 登入使用者取得token。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  message:
+                    type: string
+                    example: Login success.
+                  token:
+                    type: string
+                    example: 95f585c748524b1ba154c13a37f973f4
+
+#######################
+# 儲值卡 API #
+#######################
+# 生成儲值卡 API
+  /api/generate/voucher:
+    post:
+      tags:
+      - "儲值卡"
+      summary: 使用管理員權限生成儲值卡序號。
+      description: ""
+      requestBody:
+        description: 輸入管理員權限與金額，生成儲值卡序號。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 有管理員權限的登入 token
+                  type: string
+                  required: true
+                amount:
+                  description: 內含的金額
+                  type: int
+                  default: 1
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  token:
+                    type: string
+                    example: 27add4b6aa8a6842e3072ac048a7b20b9c73f8f4b0ec06ce9b0f513b9b201102
+# 兌換儲值卡
+  /api/redeem/voucher:
+    post:
+      tags:
+      - "儲值卡"
+      summary: 兌換儲值卡。
+      description: ""
+      requestBody:
+        description: 兌換儲值卡。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 使用者登入的 token
+                  type: string
+                  required: true
+                voucher_token:
+                  description: 儲值卡的Token
+                  type: string
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  token:
+                    type: string
+                    example: 27add4b6aa8a6842e3072ac048a7b20b9c73f8f4b0ec06ce9b0f513b9b201102
+# 列出儲值卡
+  /api/list/voucher:
+    get:
+      tags:
+      - "儲值卡"
+      summary: 列出儲值卡
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 管理員token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: balance\:餘額數量
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  balance:
+                    type: int
+                    example: 100
+#######################
+# 銀行使用者貨幣服務API#
+#######################
+# 使用者兌換數位貨幣
+  /api/redeem/currency:
+    post:
+      tags:
+      - "銀行使用者貨幣服務"
+      summary: 銀行使用者將盲簽章數位貨幣，兌換回使用者存款。可作為付款條碼使用。
+      description: ""
+      requestBody:
+        description: 兌換儲值卡。
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                bank_user_payment_id:
+                  description: 要將款項支付的使用者id
+                  type: string
+                  required: true
+                message:
+                  description: 秘密數值，代表貨幣本身。
+                  type: string
+                  required: true
+                Info:
+                  description: 公開訊息，內含貨幣額度，與其他共事公開消息。
+                  type: string
+                  required: true
+                R:
+                  description: 盲簽章的一部分。
+                  type: string
+                  required: true
+                s:
+                  description: 盲簽章的一部分。
+                  type: string
+                  required: true
+                t:
+                  description: 盲簽章的一部分。
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: code:1表示兌換成功，0表示兌換失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+# 餘額查詢
+  /api/get/balance:
+    get:
+      tags:
+      - "銀行使用者貨幣服務"
+      summary: 使用者餘額查詢
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 使用者token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: balance\:餘額數量
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  balance:
+                    type: int
+                    example: 100
+# 取得使用者支付ID
+  /api/get/user_payment_id:
+    get:
+      security:
+        - token: []
+      tags:
+      - "銀行使用者貨幣服務"
+      summary: 取得使用者支付ID
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 使用者token
+          required: true
+          schema:
+            type: string
+      # 回應參數
+      responses:
+        '200':    # status code
+          description: 顯示token是否有效。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+                  bank_user_payment_id:
+                    type: string
+                    example: 68746da1fe45c43396846880eb8c18f3966397af9f82fbf93170007d5003ec64
+# 測試用提款接口
+  #提款
+  /api/withdraw/test:
+    post:
+      tags:
+      - "銀行使用者貨幣服務"
+      summary: 測試用提款接口
+      requestBody:
+        description: 測試用提款接口
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 字串，銀行登入後取得的 token。
+                  type: string
+                  required: true
+                withdraw:
+                  description: 整數，要提領的金額。
+                  type: int
+                  required: true    
+      responses:
+        200:
+          description: 收到回傳訊息。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  Info:
+                    type: string
+                    example: '{"currency": "1", "Text": "Technology provided by ECDSA project."}'
+                  R:
+                    type: string
+                    example:  d319c95e07fc2054fc0ae0a13fa74d5e7e5e85a9aac6244876af055ab61b0c5
+                  message:
+                    type: string
+                    example: 236eaa1d29afb27d3ed69461b24968d49452454c04e945e7f7aefd1204c9bcea
+                  s:
+                    type: string
+                    example: 301ac1953003348d41b6afdbd6145eebfa1fb2fc95f5493a626bdb2956aee6cc
+                  t:
+                    type: string
+                    example: 922257d693122b5ef27f1b635ee3fb3a3f457db8b21f5cabe78b0dcec729bbab
+#######################
+# 銀行使用者AES驗證API#
+#######################
+# 儲存銀行使用者AES驗證密文
+  /api/set/aes-verify-ciphertext:
+    post:
+      tags:
+      - "銀行使用者AES驗證API"
+      summary: 儲存銀行使用者AES驗證密文
+      description: ""
+      requestBody:
+        description: 儲存銀行使用者AES驗證密文
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 
+                  type: string
+                  required: true
+                aes_key_verify_ciphertext:
+                  description: AES驗證密文
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: code:1表示成功，0表示失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+# 儲存銀行使用者AES驗證密文
+  /api/get/aes-verify-ciphertext:
+    post:
+      tags:
+      - "銀行使用者AES驗證API"
+      summary: 取得銀行使用者AES驗證密文
+      description: ""
+      requestBody:
+        description: 取得銀行使用者AES驗證密文
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: code:1表示成功，0表示失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+#######################
+# 銀行使用者電子錢包#
+#######################
+# 銀行使用者電子錢包存款
+  /api/digitalwallet/deposit:
+    post:
+      tags:
+      - "銀行使用者電子錢包"
+      summary: 銀行使用者電子錢包存錢
+      description: ""
+      requestBody:
+        description: 取得銀行使用者AES驗證密文
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              # 請求參數
+              properties:
+                token:
+                  description: 
+                  type: string
+                  required: true
+                digital_currency:
+                  description: 
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: code:1表示成功，0表示失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+# 銀行使用者電子錢包列出儲存條目
+  /api/digitalwallet/list:
+    get:
+      tags:
+      - "銀行使用者電子錢包"
+      summary: 銀行使用者電子錢包列出儲存條目
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 檢查使用者token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: code:1表示成功，0表示失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1
+#######################
+# 銀行管理員存取訊息#
+#######################
+# 銀行管理員取得交易紀錄
+  /api/administrator/get/transaction_log:
+    get:
+      tags:
+      - "銀行管理員存取訊息"
+      summary: 銀行管理員取得交易紀錄
+      description: ""
+      # 請求參數
+      parameters:
+        - name: token
+          in: query
+          description: 管理員token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: code:1表示成功，0表示失敗。
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  code:
+                    type: int
+                    example: 1

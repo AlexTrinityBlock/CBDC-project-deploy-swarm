@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/bootstrap5.0.2/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/administrator_login/style.css" rel="stylesheet">
+    <title>登入</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- 登入面板外框 -->
+            <div class="fixed  login-panel">
+
+                <!-- 登入字樣 -->
+                <div class="login-panel-title fs-3 text-center fw-bold admin-title">CBDC</div>
+                <div class="login-panel-title fs-3 text-center fw-bold admin-title">管理員登入</div>
+
+                <!-- 帳號 -->
+                <div class="login-panel-label fs-4 text-secondary">帳號</div>
+
+                <!-- 帳號輸入 -->
+                <div class="input-group">
+                    <input id="account" type="text" class="form-control" name="account" placeholder="帳號">
+                </div>
+
+                <!-- 密碼 -->
+                <div class="login-panel-label fs-4 text-secondary">密碼</div>
+
+                <!-- 密碼輸入 -->
+                <div class="input-group">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="密碼">
+                </div>
+
+                <!-- 送出按鈕 -->
+                <div class="login-panel-submit-btn d-grid gap-2">
+                    <!-- 登入失敗提示 -->
+                    <p id="LoginFail"> </p>
+                    <button id="submit" class="btn btn-primary" type="button">登入</button>
+                    <button id="" class="btn btn-primary" type="button" onclick="window.location.href = '/'">回首頁</button>
+                </div>
+
+            </div>
+            <!-- /登入面板外框 -->
+
+        </div>
+    </div>
+
+</body>
+<script src="/static/bootstrap5.0.2/bootstrap.bundle.min.js"></script>
+<script type="module" src="/static/administrator_login/script.js"></script>
+
+</html>

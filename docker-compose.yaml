@@ -1,0 +1,171 @@
+#docker-compose版本
+version: "3.3"
+#服務，每個功能或容器就是一個服務。
+services:
+
+  ###############
+  #銀行django#
+  ###############
+  #服務名稱
+  bank-django-service:
+    deploy:
+      replicas: 2
+    #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
+    image: q123717111/bank-django-service:0.1
+    #要啟動這個，才能在關閉終端後仍然繼續運作容器
+    tty: true
+    #與容器外的資料夾共通的部分
+    #容器外的/codes/bank-django-service:/code對應到容器內的
+    volumes:
+      - ./codes/bank-django-service:/code
+    # 開啟 8080 port 對外，對應到內部的80port
+    # ports:
+    #   - "80:8000"
+    # 啟動後指令
+    command: "python init.py" 
+    # 環境變數
+    environment:
+      # Django的預設密碼
+      # DJANGO_SUPERUSER_PASSWORD: dev
+      # Django連入的 redis 的IP
+      REDIS_IP: bank-redis-service
+      # Django連入的 redis 的密碼
+      REDIS_PASSWORD: dev
+      # MySQL資料庫
+      MYSQL_DATABASE: data
+      # MySQL使用者
+      MYSQL_USER: root
+      # MySQL密碼
+      MYSQL_PASSWORD: dev
+      # MySQL IP 或網址
+      MYSQL_IP: bank-database-service
+      # ECDSA 公鑰
+      ECDSA_PUBLICKEY: -----BEGIN PUBLIC KEY-----MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEvZ9OFblDmR5uNFZo+UeYXZITss78KsuntoLSrAjlWsYgeRsDajgZG+l0SDdLM1+C/mrr0Ki0IkO13ifVOOMqSw==-----END PUBLIC KEY-----
+      # ECDSA 私鑰
+      ECDSA_PRIVATEKEY: -----BEGIN EC PARAMETERS-----BgUrgQQACg==-----END EC PARAMETERS----------BEGIN EC PRIVATE KEY-----MHQCAQEEIA2zvEPDzun6cTFE1x5ISZHjwmUKE8siz5OXW+yNozcxoAcGBSuBBAAKoUQDQgAEvZ9OFblDmR5uNFZo+UeYXZITss78KsuntoLSrAjlWsYgeRsDajgZG+l0SDdLM1+C/mrr0Ki0IkO13ifVOOMqSw==-----END EC PRIVATE KEY-----
+      # ECDSA 公鑰2
+      ECDSA_PUBLICKEY_2: -----BEGIN PUBLIC KEY-----MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAE18jvLit6V+9blvfRgZ4blViurRBUbm1ZcW+KiwV45I/31jpFs1NMNPx7yc2/nOHZZo6lQy3K6h2KFfk83uXMig==-----END PUBLIC KEY-----
+      # ECDSA 私鑰2
+      ECDSA_PRIVATEKEY_2: -----BEGIN EC PARAMETERS-----BgUrgQQACg==-----END EC PARAMETERS----------BEGIN EC PRIVATE KEY-----MHQCAQEEIC45zo7VypOFxrr5vwFT4tfM0aNwXno1LWYGF2Y0dBnJoAcGBSuBBAAKoUQDQgAE18jvLit6V+9blvfRgZ4blViurRBUbm1ZcW+KiwV45I/31jpFs1NMNPx7yc2/nOHZZo6lQy3K6h2KFfk83uXMig==-----END EC PRIVATE KEY-----
+      # 銀行Django金鑰
+      BANK_SECRET_KEY: django-insecure-t$h%__5+-(e$$w-mqe%yc$=o^v069$$5+7q98%sd4w(2(op=$d
+      # 銀行發行代金券Token長度
+      BANK_VOUCHER_LENGTH: 15
+      # 銀行使用者支付ID
+      BANK_USER_PAYMENT_ID_LENGTH: 15
+      # 銀行Django 內網 IP
+      BANK_DJANGO_SERVICE_IP: bank-django-service
+      # 使用者密碼學支援服務URL
+      USER_CRYPTOGRAPHY_SUPPORT_FLASK_SERVICE_URL:  http://user-cryptography-support-flask-service:5000
+    # 等待資料庫系統運作後再啟動
+    depends_on:
+      - bank-database-service
+    #網路IP設置
+    networks:
+      - devnetwork
+
+  #########
+  #銀行資料庫#
+  #########
+  #服務名稱
+  bank-database-service:
+    deploy:
+      replicas: 1
+    #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
+    image: q123717111/bank-database-service:0.1
+    #要啟動這個，才能在關閉終端後仍然繼續運作容器
+    tty: true
+    #與容器外的資料夾共通的部分，達到資料庫持久化
+    volumes:
+    - ./data/mysql:/var/lib/mysql:rw
+    # 環境變數
+    environment:
+      MYSQL_DATABASE: data
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: dev
+    # 開啟 8082 port 對外，對應到內部的3306port
+    # ports:
+    #   - "8082:3306"
+    # 啟動後指令
+    command: --default-authentication-plugin=mysql_native_password
+    #網路IP設置
+    networks:
+      - devnetwork
+
+  #########
+  #銀行Redis#
+  #########
+  #服務名稱
+  bank-redis-service:
+    deploy:
+      replicas: 1
+    #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
+    image: q123717111/bank-redis-service:0.1
+    # ports:
+    #   - '8083:6379'
+    command: redis-server --requirepass dev
+    #網路IP設置
+    networks:
+      - devnetwork
+
+  ###############
+  #使用者密碼學支援服務#
+  ###############
+  #服務名稱
+  user-cryptography-support-flask-service:
+    deploy:
+      replicas: 2
+    #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
+    image: q123717111/user-cryptography-support-flask-service:0.1
+    #要啟動這個，才能在關閉終端後仍然繼續運作容器
+    tty: true
+    #與容器外的資料夾共通的部分
+    #容器外的/codes/user-cryptography-support-flask-service對應到容器內的code
+    volumes:
+      - ./codes/user-cryptography-support-flask-service:/code
+    # 開啟 8080 port 對外，對應到內部的80port
+    # ports:
+    #   - "8086:5000"
+    # 啟動後指令
+    command: "python init.py" 
+    # 環境變數
+    environment:
+      # Flask 除錯模式
+      FLASK_DEBUG: 1
+      # ECDSA 公鑰
+      ECDSA_PUBLICKEY: -----BEGIN PUBLIC KEY-----MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEvZ9OFblDmR5uNFZo+UeYXZITss78KsuntoLSrAjlWsYgeRsDajgZG+l0SDdLM1+C/mrr0Ki0IkO13ifVOOMqSw==-----END PUBLIC KEY-----
+      # ECDSA 私鑰
+      ECDSA_PRIVATEKEY: -----BEGIN EC PARAMETERS-----BgUrgQQACg==-----END EC PARAMETERS----------BEGIN EC PRIVATE KEY-----MHQCAQEEIA2zvEPDzun6cTFE1x5ISZHjwmUKE8siz5OXW+yNozcxoAcGBSuBBAAKoUQDQgAEvZ9OFblDmR5uNFZo+UeYXZITss78KsuntoLSrAjlWsYgeRsDajgZG+l0SDdLM1+C/mrr0Ki0IkO13ifVOOMqSw==-----END EC PRIVATE KEY-----
+      # ECDSA 公鑰2
+      ECDSA_PUBLICKEY_2: -----BEGIN PUBLIC KEY-----MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAE18jvLit6V+9blvfRgZ4blViurRBUbm1ZcW+KiwV45I/31jpFs1NMNPx7yc2/nOHZZo6lQy3K6h2KFfk83uXMig==-----END PUBLIC KEY-----
+      # ECDSA 私鑰2
+      ECDSA_PRIVATEKEY_2: -----BEGIN EC PARAMETERS-----BgUrgQQACg==-----END EC PARAMETERS----------BEGIN EC PRIVATE KEY-----MHQCAQEEIC45zo7VypOFxrr5vwFT4tfM0aNwXno1LWYGF2Y0dBnJoAcGBSuBBAAKoUQDQgAE18jvLit6V+9blvfRgZ4blViurRBUbm1ZcW+KiwV45I/31jpFs1NMNPx7yc2/nOHZZo6lQy3K6h2KFfk83uXMig==-----END EC PRIVATE KEY-----
+      # Django 銀行伺服器的URL
+      BANK_DJANGO_SERVICE_URL: http://bank-django-service:8000
+    # 等待資料庫系統運作後再啟動
+    #網路IP設置
+    networks:
+      - devnetwork
+  ###############
+  #反向代理#
+  ###############
+  bank-reverse-proxy:
+    deploy:
+      replicas: 1
+    image: nginx:1.22
+    working_dir: /etc/nginx/conf.d/
+    ports:
+      - "443:443"
+    volumes:
+      - ./codes/bank-reverse-proxy/config:/etc/nginx/conf.d/
+      - ./codes/bank-reverse-proxy/ssl:/etc/ssl/custom
+    #網路IP設置
+    networks:
+      - devnetwork
+
+networks:
+  #網路名稱為devnetwork，該名稱可以變更。
+  devnetwork:
+    driver: overlay 
+
+# docker stack deploy --compose-file docker-compose.yaml cbdcdeploy
