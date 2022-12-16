@@ -17,7 +17,7 @@ services:
     #與容器外的資料夾共通的部分
     #容器外的/codes/bank-django-service:/code對應到容器內的
     volumes:
-      - ./codes/bank-django-service:/code
+      - ./codes/bank-django-service:/code:ro
     # 開啟 8080 port 對外，對應到內部的80port
     # ports:
     #   - "80:8000"
@@ -70,14 +70,14 @@ services:
   #服務名稱
   bank-database-service:
     deploy:
-      replicas: 3
+      replicas: 1
     #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
     image: q123717111/bank-database-service:0.1
     #要啟動這個，才能在關閉終端後仍然繼續運作容器
     tty: true
     #與容器外的資料夾共通的部分，達到資料庫持久化
-    volumes:
-    - ./data/mysql:/var/lib/mysql:rw
+    # volumes:
+    # - ./data/mysql:/var/lib/mysql:rw
     # 環境變數
     environment:
       MYSQL_DATABASE: data
@@ -114,7 +114,7 @@ services:
   #服務名稱
   user-cryptography-support-flask-service:
     deploy:
-      replicas: 3
+      replicas: 2
     #這個是我們的映像檔名稱，可以自己選擇，或者使用現有映像檔
     image: q123717111/user-cryptography-support-flask-service:0.1
     #要啟動這個，才能在關閉終端後仍然繼續運作容器
@@ -122,7 +122,7 @@ services:
     #與容器外的資料夾共通的部分
     #容器外的/codes/user-cryptography-support-flask-service對應到容器內的code
     volumes:
-      - ./codes/user-cryptography-support-flask-service:/code
+      - ./codes/user-cryptography-support-flask-service:/code:ro
     # 開啟 8080 port 對外，對應到內部的80port
     # ports:
     #   - "8086:5000"
@@ -157,8 +157,8 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./codes/bank-reverse-proxy/config:/etc/nginx/conf.d/
-      - ./codes/bank-reverse-proxy/ssl:/etc/ssl/custom
+      - ./codes/bank-reverse-proxy/config:/etc/nginx/conf.d/:ro
+      - ./codes/bank-reverse-proxy/ssl:/etc/ssl/custom:ro
     #網路IP設置
     networks:
       - devnetwork
