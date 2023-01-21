@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <!-- 圖片首頁連結 -->
-            <a class="navbar-brand" href="/administrator/home">
+            <a class="navbar-brand" href="/administrator/home_en">
                 <h1 id='nav-title'>CBDC Administrator</h1>
             </a>
             <!-- /圖片首頁連結 -->
@@ -31,19 +31,30 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-secondary" href="/administrator/home">Home</a>
+                        <a class="nav-link active text-secondary" href="/administrator/home_en">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-secondary" href="/administrator/transaction_log">transaction records</a>
+                        <a class="nav-link active text-secondary" href="/administrator/transaction_log_en">transaction records</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link active text-secondary" href="">用戶清單</a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link active text-secondary" href="/administrator/issue/voucher">Issue points</a>
+                        <a class="nav-link active text-secondary" href="/administrator/issue/voucher_en">Issue points</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-secondary" href="/logout">Sign out</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                choose  language
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="/administrator/home_en">English</a></li>
+                                <li><a class="dropdown-item" href="/administrator/home">中文</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -84,7 +95,7 @@
             <!-- 卡片1 -->
             <div class="col-md-6 ">
                 <!-- 卡片連結 -->
-                <a href="/administrator/transaction_log">
+                <a href="/administrator/transaction_log_en">
                     <div class="card services-cards">
                         <div class="card-body">
                             <h3 class="card-title">transaction records</h3>
@@ -113,7 +124,7 @@
             <!-- 卡片3 -->
             <div class="col-md-6">
                 <!-- 卡片連結 -->
-                <a href="/administrator/issue/voucher">
+                <a href="/administrator/issue/voucher_en">
                     <div class="card services-cards">
                         <div class="card-body">
                             <h3 class="card-title">Issue points</h3>
