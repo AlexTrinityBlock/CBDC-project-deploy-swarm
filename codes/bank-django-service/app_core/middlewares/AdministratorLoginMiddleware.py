@@ -12,7 +12,10 @@ class AdministratorLoginMiddleware:
         self.admin_login_require_page = [
             'administrator/home',
             'administrator/issue/voucher',
-            'administrator/transaction_log'
+            'administrator/transaction_log',
+            'administrator/home_en',
+            'administrator/transaction_log_en',
+            'administrator/issue/voucher_en'
         ]
     
     def check_path_in_list(self,path:str):

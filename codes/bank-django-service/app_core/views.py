@@ -28,36 +28,58 @@ def 頁面名稱(request):
 """
 def index(request):
     return render(request, 'index/index.html')
-
+def index_en(request):
+    return render(request, 'index_en/index.html')
+    
 def home(request):
     return render(request, 'home/index.html')
+def home_en(request):
+    return render(request, 'home_en/index.html')
 
 def home2(request):
     return render(request, 'home2/index.html')
+def home2_en(request):
+    return render(request, 'home2_en/index.html')
 
 def login(request):
     return render(request, 'login/index.html')
+def login_en(request):
+    return render(request, 'login_en/index.html')
 
 def register(request):
     return render(request, 'register/index.html')
+def register_en(request):
+    return render(request, 'register_en/index.html')
 
 def logout(request):
     return render(request, 'logout/index.html')
+def logout_en(request):
+    return render(request, 'logout_en/index.html')
 
 def withdraw(request):
     return render(request, 'withdraw/index.html')
+def withdraw_en(request):
+    return render(request, 'withdraw_en/index.html')
 
 def pay_qr_code_page(request):
     return render(request, 'pay_qr_code_page/index.html')
+def pay_qr_code_page_en(request):
+    return render(request, 'pay_qr_code_page_en/index.html')
 
 def pay(request):
     return render(request, 'pay/index.html')
+def pay_en(request):
+    return render(request, 'pay_en/index.html')
 
 def deposit_upload(request):
     return render(request, 'deposit_upload/index.html')
+def deposit_upload_en(request):
+    return render(request, 'deposit_upload_en/index.html')
 
 def redeem_voucher_page(request):
     return render(request, 'redeem_voucher/index.html')
+def redeem_voucher_page_en(request):
+    return render(request, 'redeem_voucher_en/index.html')
 """
 API
 
@@ -204,7 +226,20 @@ def  administrator_issue_voucher(request):
 # 管理員交易紀錄檢視
 def administrator_transaction_log(request):
     return render(request, 'administrator_transaction_log/index.html')
-
+#英文
+# 管理員登入
+def administrator_login_en(request):
+    return render(request, 'administrator_login_en/index.html')
+# 管理員首頁
+def administrator_home_en(request):
+    return render(request, 'administrator_home_en/index.html')
+# 管理員發行點數頁面
+def  administrator_issue_voucher_en(request):
+    return render(request, 'administrator_issue_voucher_en/index.html')
+# 管理員交易紀錄檢視
+def administrator_transaction_log_en(request):
+    return render(request, 'administrator_transaction_log_en/index.html')
+#英文
 """
 管理取得紀錄
 """

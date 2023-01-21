@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/bootstrap5.0.2/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/withdraw/style.css">
+</head>
+
+<body>
+    <!-- 上排選單 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- 圖片首頁連結 -->
+            <a class="navbar-brand" href="/home_en">
+                <img src="/static/home2/CBDC.png" alt="CBDC計劃圖片" id="nav-icon">
+            </a>
+            <!-- /圖片首頁連結 -->
+            <!-- 選單響應按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- /選單響應按鈕 -->
+            <!-- 選項 -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/home_en">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/withdraw_en">Privacy Mode - Withdrawal</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/deposit/upload_en">Privacy Mode - Deposit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/redeem/voucher_en">Deposit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/pay_en">Open Payment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/pay/qr-code_en">Open Payment - Collection QR code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-secondary" href="/logout_en">Sign Out</a>
+                    </li>   
+                </ul>
+            </div>
+            <!-- /選項 -->
+        </div>
+    </nav>
+    <!-- /上排選單 -->
+
+    <!-- 主畫面橫幅 -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" id="introduction-backbround">
+                <div class="container">
+                    <div class="row">
+                        <!-- 介紹文字 -->
+                        <div class="col-6">
+                            <h1 id="introduction-title">Privacy Mode - Withdrawal</h1>
+                            <p id="introduction-text" class="">WITHOUT BEING TRACED, DIGITAL CURRENCY IS WITHDRAWN FROM THE ACCOUNT.</p>
+                        </div>
+                        <!-- /介紹文字 -->
+                        <!-- ICON -->
+                        <div class="col-6 ">
+                            <img id="introduction-image" src="../../static/withdraw/withdraw_icon.png" alt="">
+                        </div>
+                        <!-- /ICON -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /主畫面橫幅 -->
+
+    <!-- 餘額 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <!-- 餘額標題 -->
+                <p id="balance-title-text">Balance</p>
+                <!-- /餘額標題 -->
+                <!-- 餘額卡片 -->
+                <div class="card" id="balance-card">
+                    <div class="card-body">
+                        <p class="card-text text-end" id="balance_text">Balance</p>
+                    </div>
+                </div>
+                <!-- /餘額卡片 -->
+            </div>
+        </div>
+    </div>
+    <!-- /餘額 -->
+
+    <!-- 提款 -->
+    <div class="container">
+        <div class="row ">
+            <div class="col">
+                <!-- 提款外框 -->
+                <div class="card text-secondary">
+                    <div class="card-body">
+                        <!-- 提款選項 -->
+                        <nav>
+                            <!-- 按鈕 -->
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-home"
+                                    aria-selected="true">Download currency</button>
+                                <!-- <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2"
+                                    type="button" role="tab" aria-controls="nav-profile" aria-selected="false"
+                                    disabled>存入電子錢包</button> -->
+                            </div>
+                            <!-- /按鈕 -->
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <!-- 下載數位貨幣 -->
+                            <div class="tab-pane fade show active" id="nav-1" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <!-- 要提取的金額輸入框 -->
+                                <br>
+                                <div class="mb-3">
+                                    <label for="withdraw-input" class="form-label">Withdrawal amount</label>
+                                    <!-- <input type="text" class="form-control"  placeholder=""> -->
+                                    <select class="form-select" id="withdraw_input">
+                                        <option selected>Select amount</option>
+                                        <option value="1">1</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option>
+                                        <option value="5000">5000</option>
+                                        <option value="10000">10000</option>
+                                    </select>
+                                    <br>
+                                    <button type="button" class="btn btn-primary" id="withdraw_btn">Receive</button>
+                                    <button type="button" class="btn  btn-success" id="recover_btn">Restore last currency</button>
+                                </div>
+                                <!-- /要提取的金額輸入框 -->
+                            </div>
+                            <!-- /下載數位貨幣 -->
+
+                            <!-- 貨幣存入電子錢包 -->
+                            <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-profile-tab">...
+                            </div>
+                            <!-- /貨幣存入電子錢包 -->
+                        </div>
+                        <!-- /提款選項 -->
+                    </div>
+                </div>
+                <!-- /提款外框 -->
+            </div>
+        </div>
+    </div>
+    <!-- /提款 -->
+    <br>
+    <br>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="/static/bootstrap5.0.2/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/static/pay_qr_code_page/jquery.min.js"></script>
+<script type="text/javascript" src="/static/pay_qr_code_page/qrcode.min.js"></script>
+<script src="/static/sweetalert2/sweetalert2.all.min.js" type="text/javascript"></script>
+<script type="module" src="/static/withdraw/script.js"></script>
+
+</html>
