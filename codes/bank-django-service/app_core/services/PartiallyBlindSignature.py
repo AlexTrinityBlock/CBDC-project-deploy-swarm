@@ -114,6 +114,7 @@ class PartiallyBlindSignature:
             transaction_log_model.type = 'Withdraw'
             transaction_log_model.message = 'Success Withdraw !'
             transaction_log_model.amount = self.server.status['withdraw']
+            transaction_log_model.used_currency = json.dumps(result)
             transaction_log_model.save()
 
             return HttpResponse(result)
