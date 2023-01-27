@@ -28,13 +28,13 @@ function sendMessage() {
     }).then(async (jsonObj) => {
         // 若登入成功
         if (jsonObj['code'] == 1) {
-            LoginFail.innerHTML = "註冊成功"
+            LoginFail.innerHTML = "Registration success"
             await new Promise(r => setTimeout(r, 1000));
             window.location.replace("/login");
         } else if(jsonObj['code'] == 2){
-            LoginFail.innerHTML = "帳號已經被註冊"
+            LoginFail.innerHTML = "Account has been registerer"
         } else if(jsonObj['code'] == 0){
-            LoginFail.innerHTML = "請確認每個欄位都有輸入"
+            LoginFail.innerHTML = "Please make sure each field is entered"
         }
     });
 }

@@ -13,8 +13,16 @@
     --card-color-2: #00b1cc;
     --card-padding-top-1: 35px;
     --nav-font-size-1:20px;
+}.nav_set
+{
+    z-index: 99;
 }
-
+.nav_item_css{
+    font-size: 18px;
+}
+.nav_item_css_en{
+    font-size: 16px;
+}
 /* 連結去除底線 */
 a:link {
     text-decoration: none;
@@ -62,10 +70,18 @@ nav{
 }
 
 @media (max-width: 800px) {
+    #introduction-title
+    {
+        font-size: 2rem;
+    }
+    #introduction-text
+    {
+        font-size:0.6rem;
+    }
     #introduction-image {
-        margin-top: 150px;
-        margin-left: 50px;
-        width: 100px;
+        margin-top: 200px;
+        margin-left: 27px;
+        width: 92px;
     }
 }
 

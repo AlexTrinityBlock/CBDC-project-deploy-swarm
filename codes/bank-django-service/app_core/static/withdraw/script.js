@@ -68,18 +68,18 @@ async function handle_withdraw() {
             // 儲存貨幣檔案
             var blob = new Blob([currency],
                 { type: "text/plain;charset=utf-8" });
-            saveAs(blob, "貨幣." + await uuidv4() + ".txt");
+            saveAs(blob, "Currency." + await uuidv4() + ".txt");
             // 顯示提款成功彈跳窗
             Swal.fire({
                 icon: 'success',
-                title: '提款成功 !',
-                confirmButtonText: '取得QR code',
+                title: 'Withdrawal successful !',
+                confirmButtonText: 'Get QR code',
                 allowOutsideClick: false,
             }).then((result) => {
                 Swal.fire({
-                    title: '貨幣 QR code',
+                    title: 'Currency QR code',
                     html: '<div id="qr_code"></div>',
-                    confirmButtonText: '關閉',
+                    confirmButtonText: 'Close',
                     allowOutsideClick: false,
                 })
                 qr_code(currency)
@@ -87,8 +87,8 @@ async function handle_withdraw() {
         } else {
             Swal.fire({
                 icon: 'error',
-                title: '提款失敗 !',
-                text: '有可能餘額不足',
+                title: 'Withdraw failure!',
+                text: 'insufficient balance',
                 allowOutsideClick: false,
             })
         }
@@ -103,12 +103,12 @@ function handleCurrencyRecover() {
         // 下載
         var blob = new Blob([currency],
             { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "貨幣." + await uuidv4() + ".txt");
+        saveAs(blob, "Currency." + await uuidv4() + ".txt");
         // 彈跳視窗
         Swal.fire({
-            title: '貨幣 QR code',
+            title: 'Currency QR code',
             html: '<div id="qr_code"></div>',
-            confirmButtonText: '關閉',
+            confirmButtonText: 'Close',
             allowOutsideClick: false,
         })
         qr_code(currency)

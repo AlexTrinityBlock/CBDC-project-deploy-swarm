@@ -14,7 +14,15 @@
     --card-padding-top-1: 35px;
     --nav-font-size-1:20px;
 }
-
+.nav_item_css{
+    font-size: 18px;
+}
+.nav_item_css_en{
+    font-size: 16px;
+}
+.nav_set{
+    z-index:99;
+}
 /* 連結去除底線 */
 a:link {
     text-decoration: none;
@@ -62,10 +70,18 @@ nav{
 }
 
 @media (max-width: 800px) {
+    #introduction-title
+    {
+        font-size: 4rem;
+    }
+    #introduction-text
+    {
+        font-size:1.1rem;
+    }
     #introduction-image {
-        margin-top: 150px;
-        margin-left: 50px;
-        width: 100px;
+        margin-top: 183px;
+        margin-left: 12px;
+        width: 139px;
     }
 }
 
@@ -91,7 +107,7 @@ nav{
     /* 寬度 */
     max-width: 300px;
     /* 高度 */
-    height: 350px;
+    height: 380px;
     /* 置中 */
     float: none;
     margin-left: auto;

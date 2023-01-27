@@ -12,7 +12,16 @@ body {
     /* background-color: var(--page-background-color); */
     background-image: linear-gradient(to right, var(--page-background-color-1), var(--page-background-color-2));
 }
-
+.nav_item_css{
+    font-size: 18px;
+}
+.nav_item_css_en{
+    font-size: 16px;
+}
+.nav_set
+{
+    z-index: 99;
+}
 /* 登入面板最外框 */
 .login-panel {
     /* 背景 */

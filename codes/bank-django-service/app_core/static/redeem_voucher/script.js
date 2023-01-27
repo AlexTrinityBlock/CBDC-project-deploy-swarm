@@ -49,8 +49,8 @@ async function process_2(decodedText) {
     if (redeemResult.code == 0) {
         Swal.fire({
             icon: 'error',
-            title: '儲值失敗 !',
-            text:'請檢查儲值條碼是否正確，或被使用。'
+            title: 'Points redemption failed !',
+            text:'Please confirm the QRcode is correct。'
         })
     }
     init()

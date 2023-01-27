@@ -63,7 +63,7 @@ function file_handler() {
         } else {
             Swal.fire({
                 icon: 'error',
-                title: '無效的貨幣!',
+                title: 'Invalid currency!',
             })
         }
     });
@@ -96,7 +96,7 @@ async function qr_code() {
         if (result.code == 0) {
             Swal.fire({
                 icon: 'error',
-                title: '無效的 QR code',
+                title: 'Invalid QR code',
             })
         }
         // 等待 0.5 秒後重新展開攝影機

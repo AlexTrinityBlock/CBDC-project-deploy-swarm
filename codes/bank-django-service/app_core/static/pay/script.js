@@ -72,8 +72,8 @@ async function payment_process_3(){
         payment_form.style.display = "block";
         Swal.fire({
             icon: 'error',
-            title: '轉帳失敗!',
-            text: '轉帳失敗，但金額不會缺失，請確認掃描的QR code 是否正確。',
+            title: 'transfer failed!',
+            text: 'The transfer failed, please confirm whether the scanned QR code is correct.',
         })
         return;
     }
@@ -94,7 +94,7 @@ async function payment_process_3(){
     if(result.code == 1){
         Swal.fire({
             icon: 'success',
-            title: '支付成功 !',
+            title: 'Payment successful!',
         })
     }
 }
