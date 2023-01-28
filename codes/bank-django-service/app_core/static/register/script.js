@@ -30,7 +30,7 @@ function sendMessage() {
         if (jsonObj['code'] == 1) {
             LoginFail.innerHTML = "Registration success"
             await new Promise(r => setTimeout(r, 1000));
-            window.location.replace("/login");
+            window.location.replace("/login_en");
         } else if(jsonObj['code'] == 2){
             LoginFail.innerHTML = "Account has been registerer"
         } else if(jsonObj['code'] == 0){
