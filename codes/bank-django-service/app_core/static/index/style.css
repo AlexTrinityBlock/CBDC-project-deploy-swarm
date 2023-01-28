@@ -66,13 +66,18 @@ nav{
 }
 
 @media (max-width: 800px) {
+    .login2_btn
+    {
+        font-size: 18px !important;
+    }
+
     #introduction-title
     {
         font-size: 4rem;
     }
     #introduction-text
     {
-        font-size:1rem;
+        font-size:1.1rem;
     }
     #introduction-image {
         margin-top: 200px;
