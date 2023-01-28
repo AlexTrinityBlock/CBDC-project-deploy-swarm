@@ -42,7 +42,7 @@ function sendMessage() {
 //處理密碼不吻合
 function handlePasswordMatch(){
     if ( password.value != password_check.value){
-        LoginFail.innerHTML = "兩次密碼不吻合"
+        LoginFail.innerHTML = "Password are not match."
         return false
     }
     return true
@@ -55,7 +55,7 @@ function handleValidateEmail()
   {
     return (true)
   }
-  LoginFail.innerHTML = "E-mail 格式不符合"
+  LoginFail.innerHTML = "Wrong e-mail format."
     return (false)
 }
 

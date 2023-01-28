@@ -31,7 +31,7 @@ function sendMessage(account_input, password_input) {
             LoginFail.innerHTML = " "
             window.location.replace("/home_en");
         } else {
-            LoginFail.innerHTML = "登入失敗，請重新登入"
+            LoginFail.innerHTML = "Login failed"
         }
     });
 }
