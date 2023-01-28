@@ -3,7 +3,14 @@
 ## Deploy the swarm service
 
 ```
-chmmod -R +rw ./data/mysql
+chmod -R +rw ./data/mysql
 
 source deploy.sh
+```
+
+## Follow logs
+
+```
+sudo docker service logs --raw -f cbdcdeploy_bank-django-service
+sudo docker service logs --raw -f cbdcdeploy_bank-database-service
 ```
