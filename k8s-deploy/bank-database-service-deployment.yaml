@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: bank-database-service
-        image: FROM mysql:8.0.31
+        image: mysql:8.0.31
         env:
         - name: MYSQL_DATABASE
           value: "data"
