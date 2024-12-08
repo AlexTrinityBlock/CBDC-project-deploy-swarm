@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-cryptography-support-flask-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-cryptography-support-flask-service
+  template:
+    metadata:
+      labels:
+        app: user-cryptography-support-flask-service
+    spec:
+      containers:
+      - name: user-cryptography-support-flask-service
+        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/user-cryptography-support-flask-service:0.1
+        env:
+        - name: FLASK_DEBUG
+          value: "1"
+        command: ["python", "init.py"]
+        volumeMounts:
+        - name: code
+          mountPath: /code
+          readOnly: true
+      volumes:
+      - name: code
+        hostPath:
+          path: /codes/user-cryptography-support-flask-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-cryptography-support-flask-service
+spec:
+  selector:
+    app: user-cryptography-support-flask-service
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

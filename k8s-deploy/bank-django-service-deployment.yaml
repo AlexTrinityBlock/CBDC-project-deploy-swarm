@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-django-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-django-service
+  template:
+    metadata:
+      labels:
+        app: bank-django-service
+    spec:
+      containers:
+      - name: bank-django-service
+        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/bank-django-service:0.1
+        env:
+        - name: REDIS_IP
+          value: "bank-redis-service"
+        - name: REDIS_PASSWORD
+          value: "dev"
+        - name: MYSQL_DATABASE
+          value: "data"
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_PASSWORD
+          value: "dev"
+        - name: MYSQL_IP
+          value: "bank-database-service"
+        volumeMounts:
+        - name: code
+          mountPath: /code
+          readOnly: true
+      volumes:
+      - name: code
+        hostPath:
+          path: /codes/bank-django-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-django-service
+spec:
+  selector:
+    app: bank-django-service
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

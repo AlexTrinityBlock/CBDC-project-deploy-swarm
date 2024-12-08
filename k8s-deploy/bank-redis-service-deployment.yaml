@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-redis-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-redis-service
+  template:
+    metadata:
+      labels:
+        app: bank-redis-service
+    spec:
+      containers:
+      - name: bank-redis-service
+        image: redis:latest
+        command: ["redis-server", "--requirepass", "dev"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-redis-service
+spec:
+  selector:
+    app: bank-redis-service
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

@@ -1,16 +1,12 @@
 # CBDC-project-deploy-swarm
 
-## Deploy the swarm service
+## 任務目標
+
+將 docker-compose 轉換成 Kubernetes ，放到 GKE 上。
+
+我的 GCP Artifact Registry 路徑:
 
 ```
-chmod -R +rw ./data/mysql
-
-source deploy.sh
+asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/
 ```
 
-## Follow logs
-
-```
-sudo docker service logs --raw -f cbdcdeploy_bank-django-service
-sudo docker service logs --raw -f cbdcdeploy_bank-database-service
-```
