@@ -14,19 +14,11 @@ spec:
     spec:
       containers:
       - name: user-cryptography-support-flask-service
-        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/user-cryptography-support-flask-service:0.1
+        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/user-cryptography-support-flask-service:latest
         env:
         - name: FLASK_DEBUG
           value: "1"
         command: ["python", "init.py"]
-        volumeMounts:
-        - name: code
-          mountPath: /code
-          readOnly: true
-      volumes:
-      - name: code
-        hostPath:
-          path: /codes/user-cryptography-support-flask-service
 ---
 apiVersion: v1
 kind: Service

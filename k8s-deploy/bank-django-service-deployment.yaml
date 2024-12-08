@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: bank-django-service
-        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/bank-django-service:0.1
+        image: asia-east1-docker.pkg.dev/cbdc-demo/cbdc-artifact-registry/bank-django-service:latest
         env:
         - name: REDIS_IP
-          value: "bank-redis-service"
+          value: "bank-redis-service.default.svc.cluster.local"
         - name: REDIS_PASSWORD
           value: "dev"
         - name: MYSQL_DATABASE
@@ -27,15 +27,7 @@ spec:
         - name: MYSQL_PASSWORD
           value: "dev"
         - name: MYSQL_IP
-          value: "bank-database-service"
-        volumeMounts:
-        - name: code
-          mountPath: /code
-          readOnly: true
-      volumes:
-      - name: code
-        hostPath:
-          path: /codes/bank-django-service
+          value: "bank-database-service.default.svc.cluster.local"
 ---
 apiVersion: v1
 kind: Service
