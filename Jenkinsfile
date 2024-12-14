@@ -14,7 +14,7 @@ pipeline {
           sshPublisherDesc(configName: 'vm', 
                            transfers: [
                              sshTransfer(sourceFiles: '**/*',  // 傳輸當前目錄下的所有檔案和資料夾
-                                         remoteDirectory: './') 
+                                         remoteDirectory: './CBDC-project-deploy-swarm') 
                            ], //  不需要傳輸檔案
                            execCommand: 'touch ./i-am-here') 
         ])
