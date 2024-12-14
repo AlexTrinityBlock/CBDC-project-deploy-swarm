@@ -1,15 +1,20 @@
 pipeline {
-    agent any
-    stages {
-        stage('Stage 1') {
-            steps {
-                echo "This is stage 1"
-            }
-        }
-        stage('Stage 2') {
-            steps {
-                echo "This is stage 2"
-            }
-        }
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        // 建置程式碼的步驟，例如：
+        echo "Local echo"
+      }
     }
+    stage('Remote Echo') {
+      steps {
+        sshPublisher(publishers: [
+          sshPublisherDesc(configName: 'vm', 
+                           transfers: [], //  不需要傳輸檔案
+                           execCommand: 'echo "Hello from Jenkins!"') 
+        ])
+      }
+    }
+  }
 }
