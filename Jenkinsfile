@@ -1,24 +1,27 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        // 建置程式碼的步驟，例如：
-        echo "Local echo"
-        sh 'ls -al' // Use sh to execute shell commands
-      }
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sshPublisher(publishers: [
+                  sshPublisherDesc(
+                    configName: 'remote-server',
+                    transfers: [
+                      sshTransfer(
+                        sourceFiles: '**/*',
+                         remoteDirectory: './CBDC-project-deploy-swarm',
+                        execCommand: 'touch 123'
+                      )
+                    ]
+                  )
+                ])
+            }
+        }
     }
-    stage('Remote Echo') {
-      steps {
-        sshPublisher(publishers: [
-          sshPublisherDesc(configName: 'vm', 
-                           transfers: [
-                             sshTransfer(sourceFiles: '**/*',  // 傳輸當前目錄下的所有檔案和資料夾
-                                         remoteDirectory: './CBDC-project-deploy-swarm') 
-                           ], //  不需要傳輸檔案
-                           execCommand: 'bash ./CBDC-project-deploy-swarm/deploy.sh') 
-        ])
-      }
-    }
-  }
 }
