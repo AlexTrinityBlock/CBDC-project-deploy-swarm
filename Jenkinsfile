@@ -17,8 +17,7 @@ pipeline {
                                          remoteDirectory: './CBDC-project-deploy-swarm',
                                          execCommand: 'bash ./CBDC-project-deploy-swarm/deploy.sh'
                                         ) 
-                           ], //  不需要傳輸檔案
-                           execCommand: 'bash ./CBDC-project-deploy-swarm/deploy.sh') 
+                           ]
         ])
       }
     }
