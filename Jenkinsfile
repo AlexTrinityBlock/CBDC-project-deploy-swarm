@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         // 建置程式碼的步驟，例如：
-        echo "Local echo" && ls -al
+        echo "Local echo"
       }
     }
     stage('Remote Echo') {
