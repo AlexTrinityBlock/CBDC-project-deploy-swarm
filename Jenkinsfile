@@ -16,7 +16,7 @@ pipeline {
                              sshTransfer(sourceFiles: '**/*',  // 傳輸當前目錄下的所有檔案和資料夾
                                          remoteDirectory: './') 
                            ], //  不需要傳輸檔案
-                           execCommand: 'touch /root/i-am-here') 
+                           execCommand: 'touch ./i-am-here') 
         ])
       }
     }
