@@ -7,6 +7,12 @@ pipeline {
         echo "Local echo"
       }
     }
+    stage('Test') {
+      steps {
+        // 建置程式碼的步驟，例如：
+        ls -al
+      }
+    }
     stage('Remote Echo') {
       steps {
         sshPublisher(publishers: [
