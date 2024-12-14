@@ -15,7 +15,7 @@ pipeline {
                       sshTransfer(
                         sourceFiles: '**/*',
                          remoteDirectory: './CBDC-project-deploy-swarm',
-                        execCommand: 'touch 123'
+                        execCommand: 'cd CBDC-project-deploy-swarm && docker compose up -d'
                       )
                     ]
                   )
