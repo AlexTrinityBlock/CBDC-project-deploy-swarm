@@ -11,8 +11,9 @@ pipeline {
       steps {
         sshPublisher(publishers: [
           sshPublisherDesc(configName: 'vm', 
-                           transfers: [], //  不需要傳輸檔案
-                           execCommand: 'touch i-am-here') 
+                           transfers: [
+                             sshTransfer(execCommand: "touch /root/iam-here")
+                           ]
         ])
       }
     }
