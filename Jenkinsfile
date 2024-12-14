@@ -12,7 +12,7 @@ pipeline {
         sshPublisher(publishers: [
           sshPublisherDesc(configName: 'vm', 
                            transfers: [], //  不需要傳輸檔案
-                           execCommand: 'echo "Hello from Jenkins!"') 
+                           execCommand: 'whoami && ip a') 
         ])
       }
     }
