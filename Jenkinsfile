@@ -5,12 +5,7 @@ pipeline {
       steps {
         // 建置程式碼的步驟，例如：
         echo "Local echo"
-      }
-    }
-    stage('Test') {
-      steps {
-        // 建置程式碼的步驟，例如：
-        ls -al
+        sh 'ls -al' // Use sh to execute shell commands
       }
     }
     stage('Remote Echo') {
