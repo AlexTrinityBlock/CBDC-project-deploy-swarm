@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sshPublisher(publishers: [
                   sshPublisherDesc(
-                    configName: 'remote-server',
+                    configName: 'vm',
                     transfers: [
                       sshTransfer(
                         sourceFiles: '**/*',
